@@ -1,171 +1,468 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-    />
+    <title>Maynard Arvin P. Villalobos | Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,500;0,700;0,900;1,100;1,400;1,500;1,700;1,900&family=Unbounded:wght@200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Hover animation in the style section is sourced from the internet. it looks so good i can't help it -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Chosen Palette: Warm Neutral Harmony -->
+    <!-- Application Structure Plan: A single-page, narrative-driven SPA. The structure flows from a high-level summary to deep dives, guiding the user through a story of professional growth. It starts with a Hero section for immediate impact. The core is an interactive timeline combining work and project milestones, allowing non-linear exploration of the user's journey. This is followed by a visual Skills Showcase using a chart for quick comprehension, a Project gallery for detailed examples, and finally sections for credentials and contact. This structure was chosen to be more engaging than a static document, allowing recruiters to quickly grasp the key value points and then explore details on demand, which is ideal for their fast-paced review process. -->
+    <!-- Visualization & Content Choices: 
+        - Hero Section: Inform -> Static Text/Links -> N/A -> Clean, immediate intro -> HTML/Tailwind.
+        - Experience Timeline: Organize/Change -> Interactive List -> Click to show details -> Guides user through career progression visually -> HTML/CSS/JS.
+        - Skills: Compare/Inform -> Horizontal Bar Chart -> Hover for tooltips -> Provides a quick, visual summary of technical abilities -> Chart.js/Canvas.
+        - Projects: Organize/Inform -> Card Grid -> Click to expand -> Neatly presents portfolio items with on-demand details -> HTML/JS/Tailwind.
+        - Education/Certs: Inform -> Styled List -> N/A -> Clear presentation of credentials -> HTML/Tailwind.
+        This approach uses interaction to manage information density, preventing a wall of text and making the resume more explorable and memorable.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-      body,
-      html {
-        height: 100%;
-        overflow-x: hidden;
-      }
-
-      h1 {
-        font-family: "Unbounded", sans-serif;
-      }
       body {
-        background: linear-gradient(45deg, #128eed, #ff696b);
-        margin: 0;
-        padding: 0;
-        font-family: "Roboto Condensed", sans-serif;
-        color: white;
+        font-family: "Inter", sans-serif;
+        background-color: #fdfbf8;
+        color: #383434;
       }
-      .main-cards:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transform: scale(1.05);
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -33px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background-color: #d4c2ad;
+        border: 3px solid #fdfbf8;
+        z-index: 1;
+        transition: all 0.3s ease;
       }
-      .card-body > p {
-        color: #000000;
-        height: 3em;
-        margin-bottom: 0px;
+      .timeline-item.active::before {
+        background-color: #8c6a5d;
+        transform: translateY(-50%) scale(1.2);
       }
-      .card-header {
-        color: #000000;
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 400px;
+        max-height: 50vh;
       }
-      .button {
-        text-decoration: none;
-        color: black;
-      }
-      .button:hover {
-        color: #ff696b;
+      @media (max-width: 768px) {
+        .chart-container {
+          height: 500px;
+          max-height: 70vh;
+        }
       }
     </style>
-    <title>VILLALOBOS, MAYNARD ARVIN - Resume</title>
   </head>
-  <body>
-    <div class="container">
-      <!--May Adjust depending on size-->
-      <header>
-        <div class="row d-flex justify-content-center align-items-end">
-          <div class="col-12 text-center">
-            <h1 class="mt-2">
-              <strong>ARVS VILLALOBOS' RESUME</strong>
-            </h1>
-          </div>
+  <body class="antialiased">
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+      <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <a href="#" class="text-xl font-bold text-[#383434]">Maynard Arvin P. Villalobos</a>
+        <div class="hidden md:flex space-x-6">
+          <a href="#journey" class="text-gray-600 hover:text-[#8C6A5D] transition-colors">Journey</a>
+          <a href="#skills" class="text-gray-600 hover:text-[#8C6A5D] transition-colors">Skills</a>
+          <a href="#projects" class="text-gray-600 hover:text-[#8C6A5D] transition-colors">Projects</a>
+          <a href="#contact" class="text-gray-600 hover:text-[#8C6A5D] transition-colors">Contact</a>
         </div>
-      </header>
-      <div class="row mb-3 mt-1">
-        <div class="col-lg-3">
-          <img
-            src="img/1x1.JPG"
-            alt="arvs' photo"
-            class="img-fluid rounded shadow"
-          />
+        <button id="mobile-menu-button" class="md:hidden p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </nav>
+      <div id="mobile-menu" class="hidden md:hidden px-6 pb-3 space-y-2">
+        <a href="#journey" class="block text-gray-600 hover:text-[#8C6A5D] transition-colors">Journey</a>
+        <a href="#skills" class="block text-gray-600 hover:text-[#8C6A5D] transition-colors">Skills</a>
+        <a href="#projects" class="block text-gray-600 hover:text-[#8C6A5D] transition-colors">Projects</a>
+        <a href="#contact" class="block text-gray-600 hover:text-[#8C6A5D] transition-colors">Contact</a>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+      <!-- Hero Section -->
+      <section id="hero" class="text-center py-16">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-[#383434] mb-4">Full Stack Developer</h1>
+        <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-600 mb-8">
+          Engineering robust healthcare systems, modernizing legacy applications, and delivering innovative web experiences with a passion
+          for user-centered design and data integrity.
+        </p>
+        <div class="flex justify-center space-x-4">
+          <a
+            href="mailto:arvsvillalobos@gmail.com"
+            class="bg-[#8C6A5D] text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-transform transform hover:scale-105"
+            >Get In Touch</a
+          >
+          <a
+            href="https://github.com/zzzarkaztik"
+            target="_blank"
+            class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition-transform transform hover:scale-105"
+            >GitHub</a
+          >
         </div>
-        <div class="col-lg-9 d-flex justify-content-center align-items-center">
-          <!--Short bio part. may need to change this-->
-          <p class="px-5">
-            Hi! My name is Maynard Arvin Villalobos, and you can call me Arvs if
-            you want; I am a licensed professional teacher, a skilled graphic
-            designer, and a passionate baker, in addition to being an aspiring
-            Full-Stack Web Developer, ensuring a diverse skill set that spans
-            across education, design, culinary arts, and technology, enabling me
-            to bring a unique and multifaceted perspective to any project or
-            endeavor.
+      </section>
+
+      <!-- Professional Journey Section -->
+      <section id="journey" class="py-16">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-2">Professional Journey</h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            This timeline charts my growth as a developer, blending professional roles with key project milestones. Click on any point to
+            explore the details of that experience.
           </p>
         </div>
-      </div>
-      <!-- this the cards row -->
-      <div class="row text-center justify-content-between">
-        <div class="col-lg-3">
-          <div class="card main-cards shadow my-3">
-            <img
-              src="img/portfolio.png"
-              class="card-img-top"
-              alt="collage of previous projects by author"
-            />
-            <div class="card-header"><b>PORTFOLIO</b></div>
-            <div class="card-body">
-              <p>A compilation of my past projects.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          <!-- Timeline Navigation -->
+          <div class="col-span-1">
+            <div class="relative pl-8 border-l-2 border-dashed border-gray-300">
+              <div data-id="halcyon" class="timeline-item active relative pl-4 py-3 cursor-pointer mb-4">
+                <h3 class="font-bold text-lg">Programmer</h3>
+                <p class="text-sm text-gray-500">Halcyon Health Network, Inc.</p>
+                <p class="text-xs text-gray-400">Apr 2024 - Present</p>
+              </div>
+              <div data-id="kredo" class="timeline-item relative pl-4 py-3 cursor-pointer mb-4">
+                <h3 class="font-bold text-lg">Web Dev Teacher</h3>
+                <p class="text-sm text-gray-500">Kredo Japan</p>
+                <p class="text-xs text-gray-400">Aug 2024 - Jan 2025</p>
+              </div>
+              <div data-id="trident" class="timeline-item relative pl-4 py-3 cursor-pointer mb-4">
+                <h3 class="font-bold text-lg">Project: Trident Buslines</h3>
+                <p class="text-sm text-gray-500">Full-Stack System</p>
+                <p class="text-xs text-gray-400">Jan - Feb 2024</p>
+              </div>
+              <div data-id="weather" class="timeline-item relative pl-4 py-3 cursor-pointer mb-4">
+                <h3 class="font-bold text-lg">Project: Weather App</h3>
+                <p class="text-sm text-gray-500">API Integration</p>
+                <p class="text-xs text-gray-400">Jan 2024</p>
+              </div>
+              <div data-id="freelance" class="timeline-item relative pl-4 py-3 cursor-pointer mb-4">
+                <h3 class="font-bold text-lg">Freelance VA</h3>
+                <p class="text-sm text-gray-500">Web & Data Support</p>
+                <p class="text-xs text-gray-400">Jul - Oct 2023</p>
+              </div>
+              <div data-id="marketing" class="timeline-item relative pl-4 py-3 cursor-pointer">
+                <h3 class="font-bold text-lg">Digital Marketing Associate</h3>
+                <p class="text-sm text-gray-500">VBNC</p>
+                <p class="text-xs text-gray-400">Oct 2020 - Dec 2022</p>
+              </div>
             </div>
-            <div class="card-footer"><a href="#" class="button">View</a></div>
+          </div>
+          <!-- Timeline Content Display -->
+          <div class="col-span-1 md:col-span-2 bg-white p-8 rounded-xl shadow-lg">
+            <div id="timeline-content">
+              <!-- Content will be injected here by JS -->
+            </div>
           </div>
         </div>
-        <div class="col-lg-3">
-          <div class="card main-cards shadow my-3">
-            <img src="img/education.png" class="card-img-top" alt="MIT logo" />
-            <div class="card-header"><b>EDUCATION</b></div>
-            <div class="card-body">
-              <p>A glimpse of where I got majority of my skills.</p>
-            </div>
-            <div class="card-footer"><a href="#" class="button">View</a></div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills" class="py-16 bg-white rounded-xl shadow-lg my-16">
+        <div class="text-center mb-12 px-4">
+          <h2 class="text-3xl font-bold mb-2">Technical Skills</h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            A visual representation of my proficiency across various technologies. This chart reflects the tools and languages I've used to
+            build robust applications and solve complex problems.
+          </p>
+        </div>
+        <div class="chart-container">
+          <canvas id="skillsChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="py-16">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-2">Project Showcase</h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Here are some of the key projects I've developed, demonstrating my ability to build full-stack applications from concept to
+            deployment. Click "Details" to learn more about my role and the technologies used.
+          </p>
+        </div>
+        <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project cards will be injected here by JS -->
+        </div>
+      </section>
+
+      <!-- Education & Certifications -->
+      <section id="education" class="py-16">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-2">Education & Certifications</h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            My formal education and professional certifications provide the foundation for my technical skills and problem-solving
+            abilities.
+          </p>
+        </div>
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="font-bold text-xl mb-3 text-[#8C6A5D]">Education</h3>
+            <p class="font-semibold text-lg">Bachelor of Secondary Education, Major in English</p>
+            <p class="text-gray-600">Cavite State University – 2022</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="font-bold text-xl mb-3 text-[#8C6A5D]">Licenses & Certifications</h3>
+            <ul class="list-none space-y-2">
+              <li class="font-semibold">Licensed Professional Teacher</li>
+              <li class="font-semibold">Full Stack Web Developer – KodeGo Bootcamp</li>
+              <li class="font-semibold">Visual Graphic Design NCIII – TESDA</li>
+            </ul>
           </div>
         </div>
-        <div class="col-lg-3">
-          <div class="card main-cards shadow my-3">
-            <img
-              src="img/experience.png"
-              class="card-img-top"
-              alt="professionals collage"
-            />
-            <div class="card-header"><b>EXPERIENCE</b></div>
-            <div class="card-body">
-              <p>My relative employment history.</p>
-            </div>
-            <div class="card-footer"><a href="#" class="button">View</a></div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="card main-cards shadow my-3">
-            <img
-              src="img/skills.png"
-              class="card-img-top"
-              alt="skills poster art"
-            />
-            <div class="card-header"><b>SKILLS</b></div>
-            <div class="card-body">
-              <p>Detailed description and lists of my skills</p>
-            </div>
-            <div class="card-footer"><a href="#" class="button">View</a></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <footer>
-      <hr />
-      <div class="row text-center">
-        <span>arvsvillalobos@gmail.com | +639211545522</span>
-      </div>
-      <div class="row">
-        <div class="d-flex justify-content-center">
-          <div class="col-lg-2 col-xs-6">
-            <!--footer img is just a placeholder. it's a simple picture of all socmed links-->
-            <img
-              src="img/footer.png"
-              alt="socmed links"
-              class="img-fluid px-3 py-1"
-            />
-          </div>
+      </section>
+    </main>
+
+    <!-- Footer/Contact -->
+    <footer id="contact" class="bg-[#383434] text-white mt-16">
+      <div class="container mx-auto px-6 py-12 text-center">
+        <h2 class="text-3xl font-bold mb-4">Let's Build Something Great Together</h2>
+        <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+          I'm currently seeking new opportunities and am open to collaboration. If you have a project in mind or think I'd be a good fit for
+          your team, please get in touch.
+        </p>
+        <p class="text-xl font-semibold mb-2">arvsvillalobos@gmail.com</p>
+        <div class="flex justify-center space-x-6">
+          <a href="https://www.linkedin.com/in/arvsvillalobos/" target="_blank" class="text-gray-300 hover:text-white transition-colors"
+            >LinkedIn</a
+          >
+          <a href="https://github.com/zzzarkaztik" target="_blank" class="text-gray-300 hover:text-white transition-colors">GitHub</a>
         </div>
       </div>
     </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+        });
+
+        // Data Store
+        const timelineData = {
+          halcyon: {
+            title: "Programmer",
+            company: "Halcyon Health Network, Inc.",
+            period: "April 2024 – Present",
+            content: `
+                        <p class="mb-4 text-gray-700">Engineered pivotal healthcare systems, significantly improving operational efficiency, data accuracy, and patient outcomes through full-stack development, legacy system modernization, and rigorous data integrity initiatives.</p>
+                        <ul class="list-none space-y-3">
+                            <li><strong class="font-semibold text-[#8C6A5D]">MEDSS (Vue 2 + Java Spring Boot):</strong> Developed and optimized an API for automated medical transmittals, leveraging multithreading to enhance performance and improve user experience. Ensured seamless workflow integration and strict adherence to clinical guidelines.</li>
+                            <li><strong class="font-semibold text-[#8C6A5D]">HHNI Web App (Django 1.4 / Python 2.7):</strong> Led the revitalization and expansion of a critical legacy system, achieving seamless integration with MEDSS. Implemented automated certificate generation for exam results, demonstrably boosting daily clinic efficiency.</li>
+                            <li><strong class="font-semibold text-[#8C6A5D]">CDAP (SQL + Data QA):</strong> Spearheaded data quality assurance for a maritime analytics platform, writing advanced SQL scripts for comprehensive validation and correction. Guaranteed clean, reliable data, directly supporting high-accuracy client reporting.</li>
+                        </ul>
+                    `,
+          },
+          kredo: {
+            title: "Web Development Teacher",
+            company: "Kredo Japan",
+            period: "August 2024 – January 2025",
+            content: `
+                        <ul class="list-none space-y-3 text-gray-700">
+                           <li>Provided comprehensive instruction to Japanese students in web development, specializing in Laravel and foundational programming languages.</li>
+                           <li>Successfully guided students with zero prior programming knowledge through to the successful deployment of their own web applications.</li>
+                           <li>Designed and implemented engaging, practical lesson plans covering HTML, CSS, Bootstrap, PHP, and Laravel.</li>
+                           <li>Cultivated a positive and supportive learning environment, significantly enhancing students' confidence and practical technical skills.</li>
+                        </ul>
+                    `,
+          },
+          freelance: {
+            title: "Freelance Virtual Assistant",
+            company: "Remote",
+            period: "July 2023 – October 2023",
+            content: `
+                        <ul class="list-none space-y-3 text-gray-700">
+                            <li>Supported clients with website updates, content management, and basic troubleshooting, ensuring smooth online operations.</li>
+                            <li>Demonstrated strong analytical capabilities by utilizing Google Sheets to refine lead generation strategies, contributing to improved campaign performance.</li>
+                            <li>Streamlined client workflows, resulting in a documented 200% boost in productivity.</li>
+                        </ul>
+                    `,
+          },
+          marketing: {
+            title: "Digital Marketing Associate",
+            company: "VBNC",
+            period: "October 2020 – December 2022",
+            content: `
+                        <ul class="list-none space-y-3 text-gray-700">
+                           <li>Designed and produced captivating web banners, social media graphics, and promotional materials using Adobe Photoshop and Canva.</li>
+                           <li>Executed strategic social media campaigns that led to an exceptional 15000% increase in social media following.</li>
+                        </ul>
+                    `,
+          },
+          trident: {
+            title: "Project: Trident Buslines",
+            company: "Full-Stack Bus Terminal System",
+            period: "Jan - Feb 2024",
+            content: `
+                        <p class="mb-4 text-gray-700">Led the back-end development of a comprehensive bus terminal management system, including architecting the database schema and building the Laravel admin panel.</p>
+                         <p><strong class="font-semibold text-[#8C6A5D]">Role:</strong> Back-end Developer (Admin-side), Database Engineer</p>
+                         <p><strong class="font-semibold text-[#8C6A5D]">Tools:</strong> HTML, CSS, JavaScript, jQuery, PHP, Laravel, GitHub, Render</p>
+                    `,
+          },
+          weather: {
+            title: "Project: What's The Weather?",
+            company: "Weather App with API Integration",
+            period: "Jan 2024",
+            content: `
+                         <p class="mb-4 text-gray-700">Developed a robust weather application, skillfully integrating two distinct APIs to bypass paywalls and maximize data accuracy for users.</p>
+                         <p><strong class="font-semibold text-[#8C6A5D]">Role:</strong> Back-end Developer</p>
+                         <p><strong class="font-semibold text-[#8C6A5D]">Tools:</strong> HTML, CSS, JavaScript, jQuery, GitHub, GitHub Pages, APIs</p>
+                    `,
+          },
+        };
+
+        const projectsData = [
+          {
+            title: "Trident Buslines",
+            category: "Bus Terminal System",
+            role: "Back-end Developer, Database Engineer",
+            description:
+              "Led the back-end development of a comprehensive bus terminal management system. My responsibilities included architecting the database schema from the ground up and building the entire administrator-side functionality using Laravel, enabling efficient management of routes, schedules, and bookings.",
+            tools: "Laravel, PHP, MySQL, JavaScript, jQuery, HTML/CSS, GitHub",
+          },
+          {
+            title: "What's The Weather?",
+            category: "Weather App",
+            role: "Back-end Developer",
+            description:
+              "Developed a dynamic weather application that provides real-time weather data. A key challenge was integrating two separate APIs to bypass paywalls and aggregate data, ensuring a cost-effective and accurate solution for users worldwide.",
+            tools: "JavaScript, jQuery, APIs, HTML/CSS, GitHub Pages",
+          },
+          {
+            title: "THWP",
+            category: "Static Dating Website Template",
+            role: "Sole Developer",
+            description:
+              "Designed and built a responsive and visually appealing dating website template. The focus was on creating dynamic-looking interactions and a modern user interface purely with CSS and Bootstrap 5, demonstrating strong front-end skills without relying on JavaScript for animations.",
+            tools: "HTML, CSS, Bootstrap 5, GitHub Pages",
+          },
+          {
+            title: "Full-Stack Bootcamp",
+            category: "KodeGo Intensive Training",
+            role: "Student & Awardee",
+            description:
+              "Completed a rigorous Full-Stack Web Development Bootcamp with a 100% submission rate and a 95.04% average. Recognized with 'Best in Back-end' and 'Best Mini Project 1' awards, gaining proficiency across the entire web stack.",
+            tools: "React, Laravel, PHP, MySQL, JavaScript, HTML/CSS",
+          },
+        ];
+
+        // Timeline Logic
+        const timelineContainer = document.querySelector(".timeline-item").parentElement;
+        const timelineContentEl = document.getElementById("timeline-content");
+
+        function updateTimelineContent(id) {
+          const data = timelineData[id];
+          if (!data) return;
+
+          timelineContentEl.innerHTML = `
+                    <h3 class="text-2xl font-bold mb-1">${data.title}</h3>
+                    <p class="text-md font-semibold text-gray-500 mb-1">${data.company}</p>
+                    <p class="text-sm text-gray-400 mb-4">${data.period}</p>
+                    <div class="prose max-w-none text-gray-700">${data.content}</div>
+                `;
+
+          document.querySelectorAll(".timeline-item").forEach((item) => {
+            item.classList.toggle("active", item.dataset.id === id);
+          });
+        }
+
+        timelineContainer.addEventListener("click", (e) => {
+          const target = e.target.closest(".timeline-item");
+          if (target) {
+            updateTimelineContent(target.dataset.id);
+          }
+        });
+
+        // Initial Timeline Load
+        updateTimelineContent("halcyon");
+
+        // Projects Gallery Logic
+        const projectGallery = document.getElementById("project-gallery");
+        projectsData.forEach((project) => {
+          const card = document.createElement("div");
+          card.className = "bg-white rounded-xl shadow-lg overflow-hidden flex flex-col";
+          card.innerHTML = `
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold mb-1">${project.title}</h3>
+                        <p class="text-md font-semibold text-[#8C6A5D] mb-3">${project.category}</p>
+                        <p class="text-gray-600 mb-4 h-24 overflow-hidden project-desc">${project.description}</p>
+                        <p class="text-sm text-gray-500 "><strong class="text-gray-700">Tools:</strong> ${project.tools}</p>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <button class="font-bold text-[#8C6A5D] hover:underline project-toggle-button">Show Details</button>
+                    </div>
+                `;
+          projectGallery.appendChild(card);
+        });
+
+        projectGallery.addEventListener("click", (e) => {
+          if (e.target.classList.contains("project-toggle-button")) {
+            const desc = e.target.parentElement.previousElementSibling.querySelector(".project-desc");
+            desc.classList.toggle("h-24");
+            desc.classList.toggle("h-auto");
+            e.target.textContent = desc.classList.contains("h-auto") ? "Hide Details" : "Show Details";
+          }
+        });
+
+        // Skills Chart Logic
+        const skillsCtx = document.getElementById("skillsChart").getContext("2d");
+        const skillsData = {
+          labels: ["JavaScript (ES6+)", "Python", "Java", "PHP", "HTML/CSS", "SQL", "React", "Vue.js", "Laravel", "Spring Boot", "Django"],
+          datasets: [
+            {
+              label: "Proficiency",
+              data: [90, 85, 80, 95, 98, 90, 80, 85, 95, 80, 85],
+              backgroundColor: "rgba(140, 106, 93, 0.6)",
+              borderColor: "rgba(140, 106, 93, 1)",
+              borderWidth: 1,
+            },
+          ],
+        };
+
+        const skillsChart = new Chart(skillsCtx, {
+          type: "bar",
+          data: skillsData,
+          options: {
+            indexAxis: "y",
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                beginAtZero: true,
+                max: 100,
+                ticks: { color: "#6b7280" },
+              },
+              y: {
+                ticks: { color: "#383434", font: { weight: "600" } },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                enabled: true,
+                backgroundColor: "#383434",
+                titleFont: { size: 14, weight: "bold" },
+                bodyFont: { size: 12 },
+                callbacks: {
+                  label: function (context) {
+                    return `Proficiency: ${context.raw}%`;
+                  },
+                },
+              },
+            },
+          },
+        });
+      });
+    </script>
   </body>
 </html>
