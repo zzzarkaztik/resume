@@ -6,26 +6,14 @@
     <title>Maynard Arvin P. Villalobos | Full Stack Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <!-- Chosen Palette: Warm Neutral Harmony -->
-    <!-- Application Structure Plan: A single-page, narrative-driven SPA. The structure flows from a high-level summary to deep dives, guiding the user through a story of professional growth. It starts with a Hero section for immediate impact. The core is an interactive timeline combining work and project milestones, allowing non-linear exploration of the user's journey. This is followed by a visual Skills Showcase using a chart for quick comprehension, a Project gallery for detailed examples, and finally sections for credentials and contact. This structure was chosen to be more engaging than a static document, allowing recruiters to quickly grasp the key value points and then explore details on demand, which is ideal for their fast-paced review process. -->
-    <!-- Visualization & Content Choices: 
-        - Hero Section: Inform -> Static Text/Links -> N/A -> Clean, immediate intro -> HTML/Tailwind.
-        - Experience Timeline: Organize/Change -> Interactive List -> Click to show details -> Guides user through career progression visually -> HTML/CSS/JS.
-        - Skills: Compare/Inform -> Horizontal Bar Chart -> Hover for tooltips -> Provides a quick, visual summary of technical abilities -> Chart.js/Canvas.
-        - Projects: Organize/Inform -> Card Grid -> Click to expand -> Neatly presents portfolio items with on-demand details -> HTML/JS/Tailwind.
-        - Education/Certs: Inform -> Styled List -> N/A -> Clear presentation of credentials -> HTML/Tailwind.
-        This approach uses interaction to manage information density, preventing a wall of text and making the resume more explorable and memorable.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
       body {
         font-family: "Inter", sans-serif;
-        background-color: #fdfbf8;
-        color: #383434;
+        background-color: #1a1a1f;
+        color: #e0e0e0;
       }
       .timeline-item::before {
         content: "";
@@ -36,13 +24,13 @@
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        background-color: #d4c2ad;
-        border: 3px solid #fdfbf8;
+        background-color: #2d3748;
+        border: 3px solid #1a1a1f;
         z-index: 1;
         transition: all 0.3s ease;
       }
       .timeline-item.active::before {
-        background-color: #8c6a5d;
+        background-color: #3b82f6;
         transform: translateY(-50%) scale(1.2);
       }
       .chart-container {
@@ -53,6 +41,10 @@
         margin-right: auto;
         height: 400px;
         max-height: 50vh;
+        background-color: #25252b;
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
       @media (max-width: 768px) {
         .chart-container {
@@ -64,47 +56,47 @@
   </head>
   <body class="antialiased">
     <!-- Header & Navigation -->
-    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <header class="bg-[#25252b] backdrop-blur-md sticky top-0 z-50 shadow-sm border-b border-gray-800">
       <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-        <a href="#" class="text-xl font-bold text-[#383434]">Maynard Arvin P. Villalobos</a>
+        <a href="#" class="text-xl font-bold text-white">Maynard Arvin P. Villalobos</a>
         <div class="hidden md:flex space-x-6">
-          <a href="#journey" class="text-gray-600 hover:text-[#8C6A5D] transition-colors">Journey</a>
-          <a href="#skills" class="text-gray-600 hover:text-[#8C6A5D] transition-colors">Skills</a>
-          <a href="#projects" class="text-gray-600 hover:text-[#8C6A5D] transition-colors">Projects</a>
-          <a href="#contact" class="text-gray-600 hover:text-[#8C6A5D] transition-colors">Contact</a>
+          <a href="#journey" class="text-gray-400 hover:text-blue-400 transition-colors">Journey</a>
+          <a href="#skills" class="text-gray-400 hover:text-blue-400 transition-colors">Skills</a>
+          <a href="#projects" class="text-gray-400 hover:text-blue-400 transition-colors">Projects</a>
+          <a href="#contact" class="text-gray-400 hover:text-blue-400 transition-colors">Contact</a>
         </div>
-        <button id="mobile-menu-button" class="md:hidden p-2">
+        <button id="mobile-menu-button" class="md:hidden p-2 text-gray-400 hover:text-white">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
           </svg>
         </button>
       </nav>
-      <div id="mobile-menu" class="hidden md:hidden px-6 pb-3 space-y-2">
-        <a href="#journey" class="block text-gray-600 hover:text-[#8C6A5D] transition-colors">Journey</a>
-        <a href="#skills" class="block text-gray-600 hover:text-[#8C6A5D] transition-colors">Skills</a>
-        <a href="#projects" class="block text-gray-600 hover:text-[#8C6A5D] transition-colors">Projects</a>
-        <a href="#contact" class="block text-gray-600 hover:text-[#8C6A5D] transition-colors">Contact</a>
+      <div id="mobile-menu" class="hidden md:hidden px-6 pb-3 space-y-2 bg-[#25252b]">
+        <a href="#journey" class="block text-gray-400 hover:text-blue-400 transition-colors">Journey</a>
+        <a href="#skills" class="block text-gray-400 hover:text-blue-400 transition-colors">Skills</a>
+        <a href="#projects" class="block text-gray-400 hover:text-blue-400 transition-colors">Projects</a>
+        <a href="#contact" class="block text-gray-400 hover:text-blue-400 transition-colors">Contact</a>
       </div>
     </header>
 
     <main class="container mx-auto px-6 py-12">
       <!-- Hero Section -->
       <section id="hero" class="text-center py-16">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-[#383434] mb-4">Full Stack Developer</h1>
-        <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-600 mb-8">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4">Full Stack Developer</h1>
+        <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-400 mb-8">
           Engineering robust healthcare systems, modernizing legacy applications, and delivering innovative web experiences with a passion
           for user-centered design and data integrity.
         </p>
         <div class="flex justify-center space-x-4">
           <a
             href="mailto:arvsvillalobos@gmail.com"
-            class="bg-[#8C6A5D] text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-transform transform hover:scale-105"
+            class="bg-blue-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-600 transition-transform transform hover:scale-105"
             >Get In Touch</a
           >
           <a
             href="https://github.com/zzzarkaztik"
             target="_blank"
-            class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition-transform transform hover:scale-105"
+            class="bg-gray-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-600 transition-transform transform hover:scale-105"
             >GitHub</a
           >
         </div>
@@ -113,8 +105,8 @@
       <!-- Professional Journey Section -->
       <section id="journey" class="py-16">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold mb-2">Professional Journey</h2>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 class="text-3xl font-bold mb-2 text-white">Professional Journey</h2>
+          <p class="text-lg text-gray-400 max-w-2xl mx-auto">
             This timeline charts my growth as a developer, blending professional roles with key project milestones. Click on any point to
             explore the details of that experience.
           </p>
@@ -122,41 +114,41 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           <!-- Timeline Navigation -->
           <div class="col-span-1">
-            <div class="relative pl-8 border-l-2 border-dashed border-gray-300">
+            <div class="relative pl-8 border-l-2 border-dashed border-gray-700">
               <div data-id="halcyon" class="timeline-item active relative pl-4 py-3 cursor-pointer mb-4">
-                <h3 class="font-bold text-lg">Programmer</h3>
-                <p class="text-sm text-gray-500">Halcyon Health Network, Inc.</p>
-                <p class="text-xs text-gray-400">Apr 2024 - Present</p>
+                <h3 class="font-bold text-lg text-white">Programmer</h3>
+                <p class="text-sm text-gray-400">Halcyon Health Network, Inc.</p>
+                <p class="text-xs text-gray-500">Apr 2024 - Present</p>
               </div>
               <div data-id="kredo" class="timeline-item relative pl-4 py-3 cursor-pointer mb-4">
-                <h3 class="font-bold text-lg">Web Dev Teacher</h3>
-                <p class="text-sm text-gray-500">Kredo Japan</p>
-                <p class="text-xs text-gray-400">Aug 2024 - Jan 2025</p>
+                <h3 class="font-bold text-lg text-white">Web Dev Teacher</h3>
+                <p class="text-sm text-gray-400">Kredo Japan</p>
+                <p class="text-xs text-gray-500">Aug 2024 - Jan 2025</p>
               </div>
               <div data-id="trident" class="timeline-item relative pl-4 py-3 cursor-pointer mb-4">
-                <h3 class="font-bold text-lg">Project: Trident Buslines</h3>
-                <p class="text-sm text-gray-500">Full-Stack System</p>
-                <p class="text-xs text-gray-400">Jan - Feb 2024</p>
+                <h3 class="font-bold text-lg text-white">Project: Trident Buslines</h3>
+                <p class="text-sm text-gray-400">Full-Stack System</p>
+                <p class="text-xs text-gray-500">Jan - Feb 2024</p>
               </div>
               <div data-id="weather" class="timeline-item relative pl-4 py-3 cursor-pointer mb-4">
-                <h3 class="font-bold text-lg">Project: Weather App</h3>
-                <p class="text-sm text-gray-500">API Integration</p>
-                <p class="text-xs text-gray-400">Jan 2024</p>
+                <h3 class="font-bold text-lg text-white">Project: Weather App</h3>
+                <p class="text-sm text-gray-400">API Integration</p>
+                <p class="text-xs text-gray-500">Jan 2024</p>
               </div>
               <div data-id="freelance" class="timeline-item relative pl-4 py-3 cursor-pointer mb-4">
-                <h3 class="font-bold text-lg">Freelance VA</h3>
-                <p class="text-sm text-gray-500">Web & Data Support</p>
-                <p class="text-xs text-gray-400">Jul - Oct 2023</p>
+                <h3 class="font-bold text-lg text-white">Freelance VA</h3>
+                <p class="text-sm text-gray-400">Web & Data Support</p>
+                <p class="text-xs text-gray-500">Jul - Oct 2023</p>
               </div>
               <div data-id="marketing" class="timeline-item relative pl-4 py-3 cursor-pointer">
-                <h3 class="font-bold text-lg">Digital Marketing Associate</h3>
-                <p class="text-sm text-gray-500">VBNC</p>
-                <p class="text-xs text-gray-400">Oct 2020 - Dec 2022</p>
+                <h3 class="font-bold text-lg text-white">Digital Marketing Associate</h3>
+                <p class="text-sm text-gray-400">VBNC</p>
+                <p class="text-xs text-gray-500">Oct 2020 - Dec 2022</p>
               </div>
             </div>
           </div>
           <!-- Timeline Content Display -->
-          <div class="col-span-1 md:col-span-2 bg-white p-8 rounded-xl shadow-lg">
+          <div class="col-span-1 md:col-span-2 bg-[#25252b] p-8 rounded-xl shadow-lg border border-gray-800">
             <div id="timeline-content">
               <!-- Content will be injected here by JS -->
             </div>
@@ -165,10 +157,10 @@
       </section>
 
       <!-- Skills Section -->
-      <section id="skills" class="py-16 bg-white rounded-xl shadow-lg my-16">
+      <section id="skills" class="py-16 bg-[#25252b] rounded-xl shadow-lg my-16 border border-gray-800">
         <div class="text-center mb-12 px-4">
-          <h2 class="text-3xl font-bold mb-2">Technical Skills</h2>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 class="text-3xl font-bold mb-2 text-white">Technical Skills</h2>
+          <p class="text-lg text-gray-400 max-w-2xl mx-auto">
             A visual representation of my proficiency across various technologies. This chart reflects the tools and languages I've used to
             build robust applications and solve complex problems.
           </p>
@@ -181,8 +173,8 @@
       <!-- Projects Section -->
       <section id="projects" class="py-16">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold mb-2">Project Showcase</h2>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 class="text-3xl font-bold mb-2 text-white">Project Showcase</h2>
+          <p class="text-lg text-gray-400 max-w-2xl mx-auto">
             Here are some of the key projects I've developed, demonstrating my ability to build full-stack applications from concept to
             deployment. Click "Details" to learn more about my role and the technologies used.
           </p>
@@ -195,24 +187,24 @@
       <!-- Education & Certifications -->
       <section id="education" class="py-16">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold mb-2">Education & Certifications</h2>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 class="text-3xl font-bold mb-2 text-white">Education & Certifications</h2>
+          <p class="text-lg text-gray-400 max-w-2xl mx-auto">
             My formal education and professional certifications provide the foundation for my technical skills and problem-solving
             abilities.
           </p>
         </div>
         <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-white p-6 rounded-xl shadow-lg">
-            <h3 class="font-bold text-xl mb-3 text-[#8C6A5D]">Education</h3>
-            <p class="font-semibold text-lg">Bachelor of Secondary Education, Major in English</p>
-            <p class="text-gray-600">Cavite State University – 2022</p>
+          <div class="bg-[#25252b] p-6 rounded-xl shadow-lg border border-gray-800">
+            <h3 class="font-bold text-xl mb-3 text-blue-400">Education</h3>
+            <p class="font-semibold text-lg text-white">Bachelor of Secondary Education, Major in English</p>
+            <p class="text-gray-400">Cavite State University – 2022</p>
           </div>
-          <div class="bg-white p-6 rounded-xl shadow-lg">
-            <h3 class="font-bold text-xl mb-3 text-[#8C6A5D]">Licenses & Certifications</h3>
+          <div class="bg-[#25252b] p-6 rounded-xl shadow-lg border border-gray-800">
+            <h3 class="font-bold text-xl mb-3 text-blue-400">Licenses & Certifications</h3>
             <ul class="list-none space-y-2">
-              <li class="font-semibold">Licensed Professional Teacher</li>
-              <li class="font-semibold">Full Stack Web Developer – KodeGo Bootcamp</li>
-              <li class="font-semibold">Visual Graphic Design NCIII – TESDA</li>
+              <li class="font-semibold text-white">Licensed Professional Teacher</li>
+              <li class="font-semibold text-white">Full Stack Web Developer – KodeGo Bootcamp</li>
+              <li class="font-semibold text-white">Visual Graphic Design NCIII – TESDA</li>
             </ul>
           </div>
         </div>
@@ -220,19 +212,19 @@
     </main>
 
     <!-- Footer/Contact -->
-    <footer id="contact" class="bg-[#383434] text-white mt-16">
+    <footer id="contact" class="bg-[#25252b] text-white mt-16 border-t border-gray-800">
       <div class="container mx-auto px-6 py-12 text-center">
         <h2 class="text-3xl font-bold mb-4">Let's Build Something Great Together</h2>
-        <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+        <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
           I'm currently seeking new opportunities and am open to collaboration. If you have a project in mind or think I'd be a good fit for
           your team, please get in touch.
         </p>
         <p class="text-xl font-semibold mb-2">arvsvillalobos@gmail.com</p>
         <div class="flex justify-center space-x-6">
-          <a href="https://www.linkedin.com/in/arvsvillalobos/" target="_blank" class="text-gray-300 hover:text-white transition-colors"
+          <a href="https://www.linkedin.com/in/arvsvillalobos/" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors"
             >LinkedIn</a
           >
-          <a href="https://github.com/zzzarkaztik" target="_blank" class="text-gray-300 hover:text-white transition-colors">GitHub</a>
+          <a href="https://github.com/zzzarkaztik" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors">GitHub</a>
         </div>
       </div>
     </footer>
@@ -253,11 +245,11 @@
             company: "Halcyon Health Network, Inc.",
             period: "April 2024 – Present",
             content: `
-                        <p class="mb-4 text-gray-700">Engineered pivotal healthcare systems, significantly improving operational efficiency, data accuracy, and patient outcomes through full-stack development, legacy system modernization, and rigorous data integrity initiatives.</p>
+                        <p class="mb-4 text-gray-300">Engineered pivotal healthcare systems, significantly improving operational efficiency, data accuracy, and patient outcomes through full-stack development, legacy system modernization, and rigorous data integrity initiatives.</p>
                         <ul class="list-none space-y-3">
-                            <li><strong class="font-semibold text-[#8C6A5D]">MEDSS (Vue 2 + Java Spring Boot):</strong> Developed and optimized an API for automated medical transmittals, leveraging multithreading to enhance performance and improve user experience. Ensured seamless workflow integration and strict adherence to clinical guidelines.</li>
-                            <li><strong class="font-semibold text-[#8C6A5D]">HHNI Web App (Django 1.4 / Python 2.7):</strong> Led the revitalization and expansion of a critical legacy system, achieving seamless integration with MEDSS. Implemented automated certificate generation for exam results, demonstrably boosting daily clinic efficiency.</li>
-                            <li><strong class="font-semibold text-[#8C6A5D]">CDAP (SQL + Data QA):</strong> Spearheaded data quality assurance for a maritime analytics platform, writing advanced SQL scripts for comprehensive validation and correction. Guaranteed clean, reliable data, directly supporting high-accuracy client reporting.</li>
+                            <li><strong class="font-semibold text-blue-400">MEDSS (Vue 2 + Java Spring Boot):</strong> Developed and optimized an API for automated medical transmittals, leveraging multithreading to enhance performance and improve user experience. Ensured seamless workflow integration and strict adherence to clinical guidelines.</li>
+                            <li><strong class="font-semibold text-blue-400">HHNI Web App (Django 1.4 / Python 2.7):</strong> Led the revitalization and expansion of a critical legacy system, achieving seamless integration with MEDSS. Implemented automated certificate generation for exam results, demonstrably boosting daily clinic efficiency.</li>
+                            <li><strong class="font-semibold text-blue-400">CDAP (SQL + Data QA):</strong> Spearheaded data quality assurance for a maritime analytics platform, writing advanced SQL scripts for comprehensive validation and correction. Guaranteed clean, reliable data, directly supporting high-accuracy client reporting.</li>
                         </ul>
                     `,
           },
@@ -266,7 +258,7 @@
             company: "Kredo Japan",
             period: "August 2024 – January 2025",
             content: `
-                        <ul class="list-none space-y-3 text-gray-700">
+                        <ul class="list-none space-y-3 text-gray-300">
                            <li>Provided comprehensive instruction to Japanese students in web development, specializing in Laravel and foundational programming languages.</li>
                            <li>Successfully guided students with zero prior programming knowledge through to the successful deployment of their own web applications.</li>
                            <li>Designed and implemented engaging, practical lesson plans covering HTML, CSS, Bootstrap, PHP, and Laravel.</li>
@@ -279,7 +271,7 @@
             company: "Remote",
             period: "July 2023 – October 2023",
             content: `
-                        <ul class="list-none space-y-3 text-gray-700">
+                        <ul class="list-none space-y-3 text-gray-300">
                             <li>Supported clients with website updates, content management, and basic troubleshooting, ensuring smooth online operations.</li>
                             <li>Demonstrated strong analytical capabilities by utilizing Google Sheets to refine lead generation strategies, contributing to improved campaign performance.</li>
                             <li>Streamlined client workflows, resulting in a documented 200% boost in productivity.</li>
@@ -291,7 +283,7 @@
             company: "VBNC",
             period: "October 2020 – December 2022",
             content: `
-                        <ul class="list-none space-y-3 text-gray-700">
+                        <ul class="list-none space-y-3 text-gray-300">
                            <li>Designed and produced captivating web banners, social media graphics, and promotional materials using Adobe Photoshop and Canva.</li>
                            <li>Executed strategic social media campaigns that led to an exceptional 15000% increase in social media following.</li>
                         </ul>
@@ -302,9 +294,9 @@
             company: "Full-Stack Bus Terminal System",
             period: "Jan - Feb 2024",
             content: `
-                        <p class="mb-4 text-gray-700">Led the back-end development of a comprehensive bus terminal management system, including architecting the database schema and building the Laravel admin panel.</p>
-                         <p><strong class="font-semibold text-[#8C6A5D]">Role:</strong> Back-end Developer (Admin-side), Database Engineer</p>
-                         <p><strong class="font-semibold text-[#8C6A5D]">Tools:</strong> HTML, CSS, JavaScript, jQuery, PHP, Laravel, GitHub, Render</p>
+                        <p class="mb-4 text-gray-300">Led the back-end development of a comprehensive bus terminal management system, including architecting the database schema and building the Laravel admin panel.</p>
+                         <p><strong class="font-semibold text-blue-400">Role:</strong> Back-end Developer (Admin-side), Database Engineer</p>
+                         <p><strong class="font-semibold text-blue-400">Tools:</strong> HTML, CSS, JavaScript, jQuery, PHP, Laravel, GitHub, Render</p>
                     `,
           },
           weather: {
@@ -312,9 +304,9 @@
             company: "Weather App with API Integration",
             period: "Jan 2024",
             content: `
-                         <p class="mb-4 text-gray-700">Developed a robust weather application, skillfully integrating two distinct APIs to bypass paywalls and maximize data accuracy for users.</p>
-                         <p><strong class="font-semibold text-[#8C6A5D]">Role:</strong> Back-end Developer</p>
-                         <p><strong class="font-semibold text-[#8C6A5D]">Tools:</strong> HTML, CSS, JavaScript, jQuery, GitHub, GitHub Pages, APIs</p>
+                         <p class="mb-4 text-gray-300">Developed a robust weather application, skillfully integrating two distinct APIs to bypass paywalls and maximize data accuracy for users.</p>
+                         <p><strong class="font-semibold text-blue-400">Role:</strong> Back-end Developer</p>
+                         <p><strong class="font-semibold text-blue-400">Tools:</strong> HTML, CSS, JavaScript, jQuery, GitHub, GitHub Pages, APIs</p>
                     `,
           },
         };
@@ -363,10 +355,10 @@
           if (!data) return;
 
           timelineContentEl.innerHTML = `
-                    <h3 class="text-2xl font-bold mb-1">${data.title}</h3>
-                    <p class="text-md font-semibold text-gray-500 mb-1">${data.company}</p>
-                    <p class="text-sm text-gray-400 mb-4">${data.period}</p>
-                    <div class="prose max-w-none text-gray-700">${data.content}</div>
+                    <h3 class="text-2xl font-bold mb-1 text-white">${data.title}</h3>
+                    <p class="text-md font-semibold text-gray-400 mb-1">${data.company}</p>
+                    <p class="text-sm text-gray-500 mb-4">${data.period}</p>
+                    <div class="prose max-w-none text-gray-300">${data.content}</div>
                 `;
 
           document.querySelectorAll(".timeline-item").forEach((item) => {
@@ -388,16 +380,16 @@
         const projectGallery = document.getElementById("project-gallery");
         projectsData.forEach((project) => {
           const card = document.createElement("div");
-          card.className = "bg-white rounded-xl shadow-lg overflow-hidden flex flex-col";
+          card.className = "bg-[#25252b] rounded-xl shadow-lg overflow-hidden flex flex-col border border-gray-800";
           card.innerHTML = `
                     <div class="p-6 flex-grow">
-                        <h3 class="text-xl font-bold mb-1">${project.title}</h3>
-                        <p class="text-md font-semibold text-[#8C6A5D] mb-3">${project.category}</p>
-                        <p class="text-gray-600 mb-4 h-24 overflow-hidden project-desc">${project.description}</p>
-                        <p class="text-sm text-gray-500 "><strong class="text-gray-700">Tools:</strong> ${project.tools}</p>
+                        <h3 class="text-xl font-bold mb-1 text-white">${project.title}</h3>
+                        <p class="text-md font-semibold text-blue-400 mb-3">${project.category}</p>
+                        <p class="text-gray-400 mb-4 h-24 overflow-hidden project-desc">${project.description}</p>
+                        <p class="text-sm text-gray-500"><strong class="text-gray-300">Tools:</strong> ${project.tools}</p>
                     </div>
-                    <div class="p-6 bg-gray-50">
-                        <button class="font-bold text-[#8C6A5D] hover:underline project-toggle-button">Show Details</button>
+                    <div class="p-6 bg-gray-800/50">
+                        <button class="font-bold text-blue-400 hover:underline project-toggle-button">Show Details</button>
                     </div>
                 `;
           projectGallery.appendChild(card);
@@ -420,8 +412,8 @@
             {
               label: "Proficiency",
               data: [90, 85, 80, 95, 98, 90, 80, 85, 95, 80, 85],
-              backgroundColor: "rgba(140, 106, 93, 0.6)",
-              borderColor: "rgba(140, 106, 93, 1)",
+              backgroundColor: "rgba(59, 130, 246, 0.6)",
+              borderColor: "rgba(59, 130, 246, 1)",
               borderWidth: 1,
             },
           ],
@@ -438,10 +430,12 @@
               x: {
                 beginAtZero: true,
                 max: 100,
-                ticks: { color: "#6b7280" },
+                ticks: { color: "#9ca3af" },
+                grid: { color: "rgba(255, 255, 255, 0.05)" },
               },
               y: {
-                ticks: { color: "#383434", font: { weight: "600" } },
+                ticks: { color: "#e5e7eb", font: { weight: "600" } },
+                grid: { color: "rgba(255, 255, 255, 0.05)" },
               },
             },
             plugins: {
@@ -450,9 +444,9 @@
               },
               tooltip: {
                 enabled: true,
-                backgroundColor: "#383434",
-                titleFont: { size: 14, weight: "bold" },
-                bodyFont: { size: 12 },
+                backgroundColor: "#1f2937",
+                titleFont: { size: 14, weight: "bold", color: "#f3f4f6" },
+                bodyFont: { size: 12, color: "#d1d5db" },
                 callbacks: {
                   label: function (context) {
                     return `Proficiency: ${context.raw}%`;
